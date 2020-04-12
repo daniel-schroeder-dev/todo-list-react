@@ -3,7 +3,7 @@ import React from 'react';
 import TodoForm from '../TodoForm/TodoForm';
 import TodoItem from '../TodoItem/TodoItem';
 
-import { createTodo, deleteTodo } from '../../utils/fetch';
+import { createTodo, deleteTodo, toggleTodo } from '../../utils/fetch';
 
 import './TodoList.css';
 
@@ -31,7 +31,8 @@ class TodoList extends React.Component {
           todos.push(todo);
           return { todos };
         });
-      });
+      })
+      .catch(console.error);
 
     this.setState({ todo: '' });
   };
@@ -55,14 +56,7 @@ class TodoList extends React.Component {
 
   handleToggleTodo = _id => {
     const todo = this.state.todos.find(todo => todo._id === _id);
-    fetch(`${process.env.REACT_APP_TODO_API_URL}/${_id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ completed: !todo.completed })
-    })
-      .then(response => response.json())
+    toggleTodo(_id, todo)
       .then(completedTodo => {
         this.setState(prevState => {
           const todos = prevState.todos.map(todo => {

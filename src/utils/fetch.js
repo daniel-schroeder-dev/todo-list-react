@@ -24,4 +24,20 @@ const deleteTodo = _id => {
   });
 }
 
-export { createTodo, deleteTodo };
+const toggleTodo = (_id, todo) => {
+  return new Promise((resolve, reject) => {
+    fetch(`${process.env.REACT_APP_TODO_API_URL}/${_id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ completed: !todo.completed })
+    })
+      .then(response => response.json())
+      .then(resolve)
+      .catch(reject);
+  });
+  
+};
+
+export { createTodo, deleteTodo, toggleTodo };
