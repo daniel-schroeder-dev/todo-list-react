@@ -65,6 +65,28 @@ class TodoList extends React.Component {
       .catch(console.error);
   };
 
+  handleToggleTodo = _id => {
+    const todo = this.state.todos.find(todo => todo._id === _id);
+    fetch(`${process.env.REACT_APP_TODO_API_URL}/${_id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ completed: !todo.completed })
+    })
+      .then(response => response.json())
+      .then(completedTodo => {
+        this.setState(prevState => {
+          const todos = prevState.todos.map(todo => {
+            if (todo._id === completedTodo._id) return completedTodo;
+            return { ...todo };
+          });
+          return { todos };
+        });
+      })
+      .catch(console.error);
+  };
+
   render() {
 
     const todos = this.state.todos.map(todo => (
@@ -72,7 +94,8 @@ class TodoList extends React.Component {
         key={todo._id} 
         name={todo.name} 
         completed={todo.completed}
-        onClick={this.handleDeleteTodo.bind(this, todo._id)}
+        onClickRemove={this.handleDeleteTodo.bind(this, todo._id)}
+        onClickToggle={this.handleToggleTodo.bind(this, todo._id)}
       />
     ));
     

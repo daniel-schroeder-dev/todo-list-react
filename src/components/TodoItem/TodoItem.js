@@ -8,9 +8,9 @@ function TodoItem(props) {
   const completed = props.completed ? 'completed ' : '';
 
   return (
-    <li className={completed + 'todo-item'}>
+    <li onClick={props.onClickToggle} className={completed + 'todo-item'}>
       {props.name}
-      <span onClick={props.onClick} className='todo-item__remove-icon'>&times;</span>
+      <span onClick={props.onClickRemove} className='todo-item__remove-icon'>&times;</span>
     </li>
   );
 }
@@ -18,7 +18,8 @@ function TodoItem(props) {
 TodoItem.propTypes = {
   name: PropTypes.string.isRequired,
   completed: PropTypes.bool.isRequired,
-  onClick: PropTypes.func.isRequired,
+  onClickRemove: PropTypes.func.isRequired,
+  onClickToggle: PropTypes.func.isRequired,
 };
 
 export default TodoItem;
