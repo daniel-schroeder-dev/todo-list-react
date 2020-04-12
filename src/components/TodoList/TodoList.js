@@ -20,8 +20,27 @@ class TodoList extends React.Component {
   }
 
   handleCreateTodo = e => {
-    console.log('create todo called');
     e.preventDefault();
+    const todo = this.state.todo;
+    fetch(process.env.REACT_APP_TODO_API_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name: todo }),
+    })
+      .then(response => response.json())
+      .then(newTodo => {
+        this.setState(prevState => {
+          const todos = prevState.todos.map(todo => ({...todo}));
+          todos.push(newTodo);
+          return { todos };
+        })
+      })
+      .catch(console.error);
+
+    this.setState({ todo: '' });
+
   };
 
   handleCreateTodoInput = e => {
