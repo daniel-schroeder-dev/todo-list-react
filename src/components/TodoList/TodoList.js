@@ -70,10 +70,9 @@ class TodoList extends React.Component {
     const todos = this.state.todos.map(todo => (
       <TodoItem 
         key={todo._id} 
-        _id={todo._id}
         name={todo.name} 
         completed={todo.completed}
-        onClick={this.handleDeleteTodo}
+        onClick={this.handleDeleteTodo.bind(this, todo._id)}
       />
     ));
     
