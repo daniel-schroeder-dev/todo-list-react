@@ -3,6 +3,8 @@ import React from 'react';
 import TodoForm from '../TodoForm/TodoForm';
 import TodoItem from '../TodoItem/TodoItem';
 
+import { createTodo } from '../../utils/fetch';
+
 import './TodoList.css';
 
 class TodoList extends React.Component {
@@ -20,29 +22,18 @@ class TodoList extends React.Component {
   }
 
   handleCreateTodo = e => {
-   
     e.preventDefault();
-    const todo = this.state.todo;
-   
-    fetch(process.env.REACT_APP_TODO_API_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ name: todo }),
-    })
-      .then(response => response.json())
-      .then(newTodo => {
+
+    createTodo(this.state.todo)
+      .then(todo => {
         this.setState(prevState => {
           const todos = prevState.todos.map(todo => ({...todo}));
-          todos.push(newTodo);
+          todos.push(todo);
           return { todos };
         });
-      })
-      .catch(console.error);
+      });
 
     this.setState({ todo: '' });
-
   };
 
   handleCreateTodoInput = e => {
