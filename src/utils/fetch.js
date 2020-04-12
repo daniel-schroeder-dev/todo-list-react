@@ -8,9 +8,20 @@ const createTodo = todo => {
     body: JSON.stringify({ name: todo }),
     })
       .then(response => response.json())
-      .then(newTodo => resolve(newTodo))
+      .then(resolve)
       .catch(reject);
   });
 };
 
-export { createTodo };
+const deleteTodo = _id => {
+  return new Promise((resolve, reject) => {
+    fetch(`${process.env.REACT_APP_TODO_API_URL}/${_id}`, {
+      method: 'DELETE',
+    })
+      .then(response => response.json())
+      .then(resolve)
+      .catch(reject);
+  });
+}
+
+export { createTodo, deleteTodo };

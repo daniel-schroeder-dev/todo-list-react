@@ -3,7 +3,7 @@ import React from 'react';
 import TodoForm from '../TodoForm/TodoForm';
 import TodoItem from '../TodoItem/TodoItem';
 
-import { createTodo } from '../../utils/fetch';
+import { createTodo, deleteTodo } from '../../utils/fetch';
 
 import './TodoList.css';
 
@@ -41,10 +41,7 @@ class TodoList extends React.Component {
   };
 
   handleDeleteTodo = _id => {
-    fetch(`${process.env.REACT_APP_TODO_API_URL}/${_id}`, {
-      method: 'DELETE',
-    })
-      .then(response => response.json())
+    deleteTodo(_id)
       .then(deletedTodo => {
         this.setState(prevState => {
           const todos = prevState.todos
