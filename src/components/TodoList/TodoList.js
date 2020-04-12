@@ -1,5 +1,6 @@
 import React from 'react';
 
+import TodoForm from '../TodoForm/TodoForm';
 import TodoItem from '../TodoItem/TodoItem';
 
 import './TodoList.css';
@@ -8,6 +9,7 @@ class TodoList extends React.Component {
 
   state = {
     todos: [],
+    todo: '',
   };
 
   componentDidMount() {
@@ -16,6 +18,15 @@ class TodoList extends React.Component {
       .then(todos => this.setState({ todos }))
       .catch(console.error);
   }
+
+  handleCreateTodo = e => {
+    console.log('create todo called');
+    e.preventDefault();
+  };
+
+  handleCreateTodoInput = e => {
+    this.setState({ todo: e.target.value });
+  };
 
   render() {
 
@@ -26,6 +37,11 @@ class TodoList extends React.Component {
     return (
       <div>
         <h1>TodoList</h1>
+        <TodoForm 
+          onSubmit={this.handleCreateTodo} 
+          onChange={this.handleCreateTodoInput}
+          todo={this.state.todo} 
+        />
         <ul>
           {todos}
         </ul>
