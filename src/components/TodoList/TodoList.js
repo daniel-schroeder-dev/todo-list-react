@@ -8,7 +8,7 @@ class TodoList extends React.Component {
   };
 
   componentDidMount() {
-    fetch('http://localhost:8080/api/todos')
+    fetch(process.env.REACT_APP_TODO_API_URL)
       .then(response => response.json())
       .then(todos => this.setState({ todos }))
       .catch(console.error);
