@@ -1,0 +1,16 @@
+.todo-form {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.todo-form__input {
+  border: none;
+  border-bottom: 1px solid #ababab;
+  width: 90%;
+  max-width: 230px;
+  font-size: 18px;
+  letter-spacing: 1px;
+}

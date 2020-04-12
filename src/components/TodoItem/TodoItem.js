@@ -8,9 +8,9 @@ function TodoItem(props) {
   const completed = props.completed ? 'completed ' : '';
 
   return (
-    <li className='todo-item'>
-      <span onClick={props.onClickToggle} className={completed}>{props.name}</span>
-      <span onClick={props.onClickRemove} className='todo-item__remove-icon'>&times;</span>
+    <li className={completed + "todo-item"}>
+      <span onClick={props.onClickToggle} className={completed + "todo-item__name"}>{props.name}</span>
+      <span onClick={props.onClickRemove} className="todo-item__remove-icon">&times;</span>
     </li>
   );
 }

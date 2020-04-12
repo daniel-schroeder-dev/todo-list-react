@@ -82,14 +82,14 @@ class TodoList extends React.Component {
     ));
     
     return (
-      <div>
-        <h1>TodoList</h1>
+      <div className="todo-list">
+        <h1 className="todo-list__site-title"><span className="todo-list__site-title__first-word">todo</span>List</h1>
         <TodoForm 
           onSubmit={this.handleCreateTodo} 
           onChange={this.handleCreateTodoInput}
           todo={this.state.todo} 
         />
-        <ul>
+        <ul className="todo-list__todos">
           {todos}
         </ul>
       </div>

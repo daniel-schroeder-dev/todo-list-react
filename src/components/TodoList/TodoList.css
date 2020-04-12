@@ -1,0 +1,33 @@
+.todo-list {
+  border: 1px solid #ababab;
+  box-shadow: 0px 0px 4px -1px #111;;
+  border-radius: 2px;
+  padding: 24px 0;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.todo-list__site-title {
+  width: 100%;
+  text-align: center;
+  padding: 0 12px;
+}
+
+.todo-list__site-title {
+  font-size: 42px;
+}
+
+.todo-list__site-title__first-word {
+  font-weight: 100;
+}
+
+.todo-list__todos {
+  padding: 0;
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  max-width: 250px;
+}
