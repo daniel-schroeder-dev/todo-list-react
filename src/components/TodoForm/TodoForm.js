@@ -5,7 +5,7 @@ import './TodoForm.css';
 
 function TodoForm(props) {
   return (
-    <form onSubmit={e => props.onSubmit(e)}>
+    <form onSubmit={props.onSubmit}>
       <input type="text" placeholder="Add a Todo" value={props.todo} onChange={props.onChange} />
     </form>
   );
