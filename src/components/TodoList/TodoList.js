@@ -1,4 +1,7 @@
 import React from 'react';
+
+import TodoItem from '../TodoItem/TodoItem';
+
 import './TodoList.css';
 
 class TodoList extends React.Component {
@@ -17,7 +20,7 @@ class TodoList extends React.Component {
   render() {
 
     const todos = this.state.todos.map(todo => (
-      <li key={todo._id}>{todo.name}</li>
+      <TodoItem key={todo._id} name={todo.name} />
     ));
     
     return (
