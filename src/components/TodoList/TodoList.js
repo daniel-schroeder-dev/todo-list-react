@@ -20,12 +20,12 @@ class TodoList extends React.Component {
   render() {
 
     const todos = this.state.todos.map(todo => (
-      <TodoItem key={todo._id} name={todo.name} />
+      <TodoItem key={todo._id} name={todo.name} completed={todo.completed} />
     ));
     
     return (
       <div>
-        TodoList
+        <h1>TodoList</h1>
         <ul>
           {todos}
         </ul>

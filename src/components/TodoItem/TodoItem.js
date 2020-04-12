@@ -5,12 +5,13 @@ import './TodoItem.css';
 
 function TodoItem(props) {
   return (
-    <li>{props.name}</li>
+    <li className={props.completed ? 'completed' : ''}>{props.name}</li>
   );
 }
 
 TodoItem.propTypes = {
   name: PropTypes.string.isRequired,
+  completed: PropTypes.bool.isRequired,
 };
 
 export default TodoItem;
