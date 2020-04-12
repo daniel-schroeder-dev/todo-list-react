@@ -20,8 +20,10 @@ class TodoList extends React.Component {
   }
 
   handleCreateTodo = e => {
+   
     e.preventDefault();
     const todo = this.state.todo;
+   
     fetch(process.env.REACT_APP_TODO_API_URL, {
       method: 'POST',
       headers: {
@@ -35,7 +37,7 @@ class TodoList extends React.Component {
           const todos = prevState.todos.map(todo => ({...todo}));
           todos.push(newTodo);
           return { todos };
-        })
+        });
       })
       .catch(console.error);
 
@@ -47,10 +49,32 @@ class TodoList extends React.Component {
     this.setState({ todo: e.target.value });
   };
 
+  handleDeleteTodo = _id => {
+    fetch(`${process.env.REACT_APP_TODO_API_URL}/${_id}`, {
+      method: 'DELETE',
+    })
+      .then(response => response.json())
+      .then(deletedTodo => {
+        this.setState(prevState => {
+          const todos = prevState.todos
+            .map(todo => ({ ...todo }))
+            .filter(todo => todo._id !== deletedTodo._id);
+          return { todos };
+        });
+      })
+      .catch(console.error);
+  };
+
   render() {
 
     const todos = this.state.todos.map(todo => (
-      <TodoItem key={todo._id} name={todo.name} completed={todo.completed} />
+      <TodoItem 
+        key={todo._id} 
+        _id={todo._id}
+        name={todo.name} 
+        completed={todo.completed}
+        onClick={this.handleDeleteTodo}
+      />
     ));
     
     return (
