@@ -26,8 +26,10 @@
   opacity: 1;
 }
 
-.todo-item:hover {
-  background-color: #9edfff;
+@media (hover: hover) {
+  .todo-item:hover {
+    background-color: #9edfff;
+  }
 }
 
 .todo-item:hover .todo-item__remove-icon {
